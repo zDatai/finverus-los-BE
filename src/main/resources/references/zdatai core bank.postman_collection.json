@@ -1,0 +1,609 @@
+{
+	"info": {
+		"_postman_id": "aa29e3c7-179f-43a0-95d4-0d6976f47723",
+		"name": "zdatai core bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "csrf",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/user/csrf",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"user",
+						"csrf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "7GPljul14LZDVO_n4wRPi-9B1ikHSVqfDe069Od40J9eJEDI1QaH7IxEgtduNovUhSl76owl-0tjKGOyOItYkd9Ls648HXf-",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"zdatai\",\r\n    \"passcode\":\"zdatai\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/user/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"user",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create permission",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIxREE5RTM5QThFOTNCMjM1RTBFNjNBNzA3NDhGOEFBRCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjgxODU3NX0.3_qe5rGOAaY2wvQsSXlxDMOr7rg2FitLyRluXm4-VXw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "evaMd-CwkAT95Q4zHwpeKGHP-UUerQcsXc55fGMKCVcWBt6WTpW7FITRpGDQ1j9XeSdqHlCs1CcnlTIBOa9ORVFsPWQjZe73",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"parentId\" : 5,\r\n    \"active\" : 1,\r\n    \"productId\" : 1,\r\n    \"description\" : \"Province\",\r\n    \"eventIdList\" : [1,2,3]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/permission",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"permission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "events",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiJEMkEyQThBODdCNjk4MUY3NzYwMDlGODZCQzI5NEUwNCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjgxNDA0OH0.6_IV4cN2_3bYbrjNUFvl1_Wov3gCTD_qA_wyftVfjVk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "U70tU5oF68htHEF6EBDVq-fq64-K9hr5yJSZS4zpLWYmpSpEZYhPMK1kjfpAeCBIdj3hz4GOxra_zi3UqvD9e7WIGwIXkRxy",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventCode\" : \"REJ\",\r\n    \"description\" : \"Reject\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/event",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create role permission",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiJDODhFQ0IwMEJCQkVGQTM3MjE5NTI2MDlBNDZENTZGQiIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjg1NDYwNH0.ZBu4QWvw1OZxdC20tvALsUY7mLzOWpVuZ2DpDygYVXw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "OIha6EYypxfAxBZmQy_8SQn34XvfuCS4porbXUyV31gNUY7LC7pr3HEFlyXt9nQCcALIfjDAzBntiEWVkLq4ZX3w5mtsZ7nz",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roleId\" : 2,\r\n    \"permissionEvents\" : [\r\n        {\r\n            \"permissionId\" : 4,\r\n            \"eventIds\" : []\r\n        },\r\n        {\r\n            \"permissionId\" : 5,\r\n            \"eventIds\" : []\r\n        },\r\n        {\r\n            \"permissionId\" : 6,\r\n            \"eventIds\" : [1, 2]\r\n        }\r\n    ],\r\n    \"active\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/roles/1/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"roles",
+						"1",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiI4MEMyOEJBMTQzOTdDRjhERDQ3QUMxRDcyNTlCMDA4RiIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjgyMzE1MX0.Ddwv7kotsOqW3iNCgGTnI1bwntMdJqOnxNMdtgCndYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "nwe1TQjh7mrygSAtOsxNYAKQMuRg-PgeMn6m5pb3Y2zr_2ZSrDWEeT_W3ljfs0JJCeF5VzunH4ZSyJkzBE7F3qeSWl-KyVFq",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : 1,\r\n    \"roleIds\" : [1,2],\r\n    \"fromDate\": \"2024-11-21\",\r\n    \"toDate\": \"2025-11-21\",\r\n    \"active\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/users/1/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"users",
+						"1",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Permissions by product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiJGRDZFOENEQUYwMDc2MTcyMUUxM0ExRjc1NTE1RDg4NSIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjg5Nzc3NH0.QQuMNo4ZBaNTexQgFDztBj18bFvH01XImLr-iqQnjU0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "nwe1TQjh7mrygSAtOsxNYAKQMuRg-PgeMn6m5pb3Y2zr_2ZSrDWEeT_W3ljfs0JJCeF5VzunH4ZSyJkzBE7F3qeSWl-KyVFq",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/products/1/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"products",
+						"1",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Permissions by role & product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIyQjNGQUEyNzUwQ0VCNkVEMkRGMEM4NDY4QzczOTgxMiIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjkwNTc2MH0.TofhHFVCybI5WoQWMAvIzTLsKXtS0p5Q82X7KQdttrE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "nwe1TQjh7mrygSAtOsxNYAKQMuRg-PgeMn6m5pb3Y2zr_2ZSrDWEeT_W3ljfs0JJCeF5VzunH4ZSyJkzBE7F3qeSWl-KyVFq",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/roles/1/products/1/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"roles",
+						"1",
+						"products",
+						"1",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Permissions by user & product Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIwOTEzMTNFRkIxMkM0NEJEQUM0OTJGMEU1RTIxMUU2NiIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjkwODY2OX0.ieJ5uNGuMaUC15UH9Q1TWOEailJB2LxM-45SnXJBSog",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "nwe1TQjh7mrygSAtOsxNYAKQMuRg-PgeMn6m5pb3Y2zr_2ZSrDWEeT_W3ljfs0JJCeF5VzunH4ZSyJkzBE7F3qeSWl-KyVFq",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/master-data/public/users/1/products/1/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"master-data",
+						"public",
+						"users",
+						"1",
+						"products",
+						"1",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "countries",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIzNkE2MUI2QzZGNjJGM0YzQ0U0NjVCQjIyMTkxMTc2RCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjI1NjEwNX0.VCHCJ8i1uKp6OQ7ytwL40x4Bka4JZaV7fKI2zLzDvNM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "evLxhe_KXb2vNbWlAcZ--lK2LCo_7JTTqtbgWdEhrgHeNujtSZfHsIyrOdmCB4fDYOtKmGSCARIOivX-m7DXO-lEnmXqUIuM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/public/country",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"public",
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "country by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIzNkE2MUI2QzZGNjJGM0YzQ0U0NjVCQjIyMTkxMTc2RCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjI1NjM3NX0.hFMpJgdub8VvaLgJKPn1OWwWNj_qUf4E6SWtIIEWXOQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "evLxhe_KXb2vNbWlAcZ--lK2LCo_7JTTqtbgWdEhrgHeNujtSZfHsIyrOdmCB4fDYOtKmGSCARIOivX-m7DXO-lEnmXqUIuM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/public/country/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"public",
+						"country",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIzNkE2MUI2QzZGNjJGM0YzQ0U0NjVCQjIyMTkxMTc2RCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjI1NjM3NX0.hFMpJgdub8VvaLgJKPn1OWwWNj_qUf4E6SWtIIEWXOQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "tuOHM92aSkjIBTTmbbTaKddMFwg4ee9VpMxQAyZiykwzJXy5hYflBeupLH7lYwTSDpnuT-IuOjABSot4nag1YENa-S0DFErc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"SL\",\r\n    \"name\" : \"Sri Lanka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/public/country",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"public",
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIzNkE2MUI2QzZGNjJGM0YzQ0U0NjVCQjIyMTkxMTc2RCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjI1NjEwNX0.VCHCJ8i1uKp6OQ7ytwL40x4Bka4JZaV7fKI2zLzDvNM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "evLxhe_KXb2vNbWlAcZ--lK2LCo_7JTTqtbgWdEhrgHeNujtSZfHsIyrOdmCB4fDYOtKmGSCARIOivX-m7DXO-lEnmXqUIuM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"SL\",\r\n    \"name\" : \"Sri Lanka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/public/country/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"public",
+						"country",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete country",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uSUQiOiIzNkE2MUI2QzZGNjJGM0YzQ0U0NjVCQjIyMTkxMTc2RCIsInN1YiI6InpkYXRhaSIsImV4cCI6MTczMjI1NjEwNX0.VCHCJ8i1uKp6OQ7ytwL40x4Bka4JZaV7fKI2zLzDvNM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-CSRF-TOKEN",
+						"value": "evLxhe_KXb2vNbWlAcZ--lK2LCo_7JTTqtbgWdEhrgHeNujtSZfHsIyrOdmCB4fDYOtKmGSCARIOivX-m7DXO-lEnmXqUIuM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/zdatai/api/v1/public/country/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"zdatai",
+						"api",
+						"v1",
+						"public",
+						"country",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
