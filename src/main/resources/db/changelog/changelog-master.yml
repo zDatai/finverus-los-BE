@@ -7,3 +7,5 @@ databaseChangeLog:
       file: "db/changelog/sql/questionnaire_section.yaml"
   - include:
       file: "db/changelog/sql/predefined_question.yaml"
+  - include:
+      file: "db/changelog/sql/api_endpoint.yaml"
