@@ -9,7 +9,6 @@ import com.zdatai.finverus.dto.InputField;
 public class CreateFieldUtil {
     public static <T> InputField<T> createField(Class<T> fieldType, Object value, String description) {
         InputField<T> field = new InputField<>();
-        field.setDescription(description);
 
         if (fieldType.isInstance(value)) {
             //field.setValue(fieldType.cast(value));

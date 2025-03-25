@@ -1,8 +1,6 @@
 package com.zdatai.finverus.model.application;
 
-import com.zdatai.finverus.dto.application.ParameterTextDto;
 import com.zdatai.finverus.enums.HTTPMethod;
-import com.zdatai.finverus.enums.UIComponentTypeEnum;
 import com.zdatai.finverus.model.AuditModifyUser;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,16 +8,16 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-//@Entity
-//@Table(name = "api_endpoint")
+@Entity
+@Table(name = "api_endpoint")
 @Data
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = false)
 public class ApiEndpoint extends AuditModifyUser {
 
-    /*@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "api_endpoint_id", nullable = false, unique = true)
     private Long apiEndpointId;
@@ -34,21 +32,13 @@ public class ApiEndpoint extends AuditModifyUser {
     @Column(name = "api_url", nullable = false)
     private String apiUrl;
 
-    @Column(name = "skippable", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
-    @Enumerated()
+    @Column(name = "http_method", nullable = false)
+    @Enumerated(EnumType.STRING)
     private HTTPMethod httpMethod;
+
+    @Column(name = "http_text", nullable = false)
     private String headerText;
-    private List<ParameterTextDto> parameters;
 
-    @Column(name = "input_type", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT TEXT")
-    @Enumerated(EnumType.STRING)
-    private UIComponentTypeEnum inputType;
-
-    @Column(name = "response_type", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT TEXT")
-    @Enumerated(EnumType.STRING)
-    private UIComponentTypeEnum responseType;
-
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "questionnaire_source_id")
-    private OptionSource questionnaireSource;*/
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "apiEndpoint", orphanRemoval = true)
+    private List<ParameterText> parameterText;
 }

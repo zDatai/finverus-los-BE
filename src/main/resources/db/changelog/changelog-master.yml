@@ -8,6 +8,8 @@ databaseChangeLog:
   - include:
       file: "db/changelog/sql/predefined_question.yaml"
   - include:
+      file: "db/changelog/sql/api_endpoint.yaml"
+  - include:
       file: "db/changelog/sql/product_scheme.yml"
   - include:
       file: "db/changelog/sql/product_sub_schema.yml"
