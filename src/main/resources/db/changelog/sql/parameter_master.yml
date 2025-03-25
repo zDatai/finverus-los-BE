@@ -1,13 +1,13 @@
 databaseChangeLog:
   - changeSet:
-      id: create-product-scheme-table
-      author: system
+      id: create-parameter-master-table
+      author: umesh
       changes:
         - createTable:
-            tableName: product_scheme
+            tableName: parameter_master
             columns:
               - column:
-                  name: product_id
+                  name: parameter_id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -15,25 +15,25 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: product_name
-                  type: varchar(50)
-                  constraints:
-                    nullable: true
-
-              - column:
-                  name: activity_type
+                  name: parameter_name
                   type: varchar(255)
                   constraints:
                     nullable: true
 
               - column:
-                  name: product_type
-                  type: varchar(50)
+                  name: parameter_type
+                  type: varchar(255)
                   constraints:
                     nullable: true
 
               - column:
-                  name: account_no_prefix
+                  name: parameter_status
+                  type: varchar(5)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: overriding_level
                   type: varchar(50)
                   constraints:
                     nullable: true
@@ -73,7 +73,7 @@ databaseChangeLog:
               # Version column from BaseEntity
               - column:
                   name: version
-                  type: int
+                  type: INT
                   defaultValue: "0"
                   constraints:
                     nullable: false
