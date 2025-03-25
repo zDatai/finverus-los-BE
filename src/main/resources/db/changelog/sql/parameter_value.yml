@@ -1,13 +1,13 @@
 databaseChangeLog:
   - changeSet:
-      id: create-product-scheme-table
-      author: system
+      id: create-parameter-value-table
+      author: umesh
       changes:
         - createTable:
-            tableName: product_scheme
+            tableName: parameter_value
             columns:
               - column:
-                  name: product_id
+                  name: parameter_value_id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -15,26 +15,44 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: product_name
-                  type: varchar(50)
+                  name: parameter_id
+                  type: bigint
                   constraints:
-                    nullable: true
+                    nullable: false
+                    foreignKeyName: fk_parameter_value_parameter
+                    references: parameter_master(parameter_id)
 
               - column:
-                  name: activity_type
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_parameter_value_product
+                    references: product_scheme(product_id)
+
+              - column:
+                  name: scheme_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_parameter_value_scheme
+                    references: product_sub_scheme(scheme_id)
+
+              - column:
+                  name: value
                   type: varchar(255)
                   constraints:
                     nullable: true
 
               - column:
-                  name: product_type
-                  type: varchar(50)
+                  name: effective_date
+                  type: date
                   constraints:
                     nullable: true
 
               - column:
-                  name: account_no_prefix
-                  type: varchar(50)
+                  name: expire_date
+                  type: date
                   constraints:
                     nullable: true
 
@@ -73,7 +91,7 @@ databaseChangeLog:
               # Version column from BaseEntity
               - column:
                   name: version
-                  type: int
+                  type: INT
                   defaultValue: "0"
                   constraints:
                     nullable: false

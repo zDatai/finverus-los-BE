@@ -74,6 +74,6 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
-                  defaultValue: 0
+                  defaultValue: "0"
                   constraints:
                     nullable: false

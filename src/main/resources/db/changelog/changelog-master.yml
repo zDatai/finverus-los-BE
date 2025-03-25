@@ -11,3 +11,7 @@ databaseChangeLog:
       file: "db/changelog/sql/product_scheme.yml"
   - include:
       file: "db/changelog/sql/product_sub_schema.yml"
+  - include:
+      file: db/changelog/sql/parameter_master.yml"
+  - include:
+      file: db/changelog/sql/parameter_value.yml"
