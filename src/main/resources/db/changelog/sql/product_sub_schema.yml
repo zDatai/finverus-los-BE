@@ -85,3 +85,13 @@ databaseChangeLog:
         - renameTable:
             oldTableName: produt_sub_scheme
             newTableName: product_sub_scheme
+
+  - changeSet:
+      id: drop-schema-status-column-from-product-scheme
+      author: umesh
+      changes:
+        - dropColumn:
+            tableName: product_sub_scheme
+            columns:
+              - column:
+                  name: schema_status
