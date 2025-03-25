@@ -1,8 +1,6 @@
 package com.zdatai.finverus.model;
 
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
@@ -19,10 +17,4 @@ public abstract class BaseEntity {
     @Version
     private int version;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    public enum Status {
-        ACTIVE, INACTIVE
-    }
 }
