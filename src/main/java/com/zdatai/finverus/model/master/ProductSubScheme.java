@@ -31,7 +31,4 @@ public class ProductSubScheme extends AuditModifyUser {
     @Column(name = "expire_date")
     private LocalDate expireDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "schema_status")
-    private ProductSubSchemeStatusEnum schemaStatus;
 }
