@@ -22,16 +22,16 @@ public class ParameterValue extends AuditModifyUser {
     private Long parameterValueId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parameter_id", nullable = false)
-    private ParameterMaster parameterMaster;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "product_id")
     private ProductScheme productScheme;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "scheme_id", nullable = false)
+    @JoinColumn(name = "scheme_id", nullable = false, referencedColumnName = "scheme_id")
     private ProductSubScheme productSubScheme;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parameter_id", nullable = false, referencedColumnName = "parameter_id")
+    private ParameterMaster parameterMaster;
 
     @Column(name = "value")
     private String value;

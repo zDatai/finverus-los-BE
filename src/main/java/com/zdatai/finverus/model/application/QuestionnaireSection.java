@@ -1,5 +1,6 @@
-package com.zdatai.finverus.model;
+package com.zdatai.finverus.model.application;
 
+import com.zdatai.finverus.model.AuditModifyUser;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

@@ -15,14 +15,6 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: parameter_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_parameter_value_parameter
-                    references: parameter_master(parameter_id)
-
-              - column:
                   name: product_id
                   type: bigint
                   constraints:
@@ -37,6 +29,14 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_parameter_value_scheme
                     references: product_sub_scheme(scheme_id)
+
+              - column:
+                  name: parameter_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_parameter_value_parameter
+                    references: parameter_master(parameter_id)
 
               - column:
                   name: value

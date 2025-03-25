@@ -77,3 +77,11 @@ databaseChangeLog:
                   defaultValue: "0"
                   constraints:
                     nullable: false
+
+  - changeSet:
+      id: rename-produt-sub-scheme-table
+      author: umesh
+      changes:
+        - renameTable:
+            oldTableName: produt_sub_scheme
+            newTableName: product_sub_scheme
