@@ -1,3 +1,9 @@
 databaseChangeLog:
   - include:
-      file: "db/changelog/sql/customer.yml"
+      file: "db/changelog/sql/option_source.yaml"
+  - include:
+      file: "db/changelog/sql/app_version_control.yaml"
+  - include:
+      file: "db/changelog/sql/questionnaire_section.yaml"
+  - include:
+      file: "db/changelog/sql/predefined_question.yaml"

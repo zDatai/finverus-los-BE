@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003
+      author: Udara
+      changes:
+        - createTable:
+            tableName: questionnaire_section
+            columns:
+              - column:
+                  name: questionnaire_section_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: section_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sequence
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+  #- property:
+      #name: tableName
+      #value: questionnaire_section
+  #- include:
+      #file: modified_user_auditor.yaml
+      #relativeToChangelogFile: true
+      #context: questionnaire_section
+      #labels: tableName=questionnaire_section
