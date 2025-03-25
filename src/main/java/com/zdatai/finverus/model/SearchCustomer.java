@@ -58,7 +58,7 @@ public class SearchCustomer {
     private LocalDate passportIssueDate;
 
     @Column(name = "passport_no")
-    private LocalDate passportNo;
+    private String passportNo;
 
     @Column(name = "visa_expired_date")
     private LocalDate visaExpiredDate;
@@ -144,9 +144,6 @@ public class SearchCustomer {
     @Column(name = "address_ownership")
     private String addressOwnership;
 
-    @Column(name = "city")
-    private String city;
-
     @Column(name = "city_id")
     private Long cityid;
 
@@ -189,11 +186,10 @@ public class SearchCustomer {
     @Column(name = "province_name")
     private String provinceName;
 
-    @Column(name = "secretarial")
-    private String secretarial;
-
     @Column(name = "secretarial_id")
     private Long secretarialId;
-    
-    
+
+    @Column(name = "secretarial_name")
+    private String secretarialName;
+
 }
