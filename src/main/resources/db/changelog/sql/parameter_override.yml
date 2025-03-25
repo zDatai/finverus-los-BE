@@ -1,13 +1,13 @@
 databaseChangeLog:
   - changeSet:
-      id: create-product-sub-scheme-table
+      id: create-parameter-override-table
       author: umesh
       changes:
         - createTable:
-            tableName: produt_sub_scheme
+            tableName: parameter_override
             columns:
               - column:
-                  name: scheme_id
+                  name: parameter_override_id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -15,8 +15,32 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: scheme_name
-                  type: varchar(50)
+                  name: parameter_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_parameter_override_parameter
+                    references: parameter_master(parameter_id)
+
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_parameter_override_product
+                    references: product_scheme(product_id)
+
+              - column:
+                  name: scheme_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_parameter_override_scheme
+                    references: product_sub_scheme(scheme_id)
+
+              - column:
+                  name: value
+                  type: varchar(255)
                   constraints:
                     nullable: true
 
@@ -29,12 +53,6 @@ databaseChangeLog:
               - column:
                   name: expire_date
                   type: date
-                  constraints:
-                    nullable: true
-
-              - column:
-                  name: schema_status
-                  type: varchar(255)
                   constraints:
                     nullable: true
 
@@ -73,15 +91,7 @@ databaseChangeLog:
               # Version column from BaseEntity
               - column:
                   name: version
-                  type: int
+                  type: INT
                   defaultValue: "0"
                   constraints:
                     nullable: false
-
-  - changeSet:
-      id: rename-produt-sub-scheme-table
-      author: umesh
-      changes:
-        - renameTable:
-            oldTableName: produt_sub_scheme
-            newTableName: product_sub_scheme

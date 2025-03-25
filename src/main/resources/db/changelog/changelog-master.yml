@@ -17,4 +17,9 @@ databaseChangeLog:
       file: "db/changelog/sql/parameter_master.yml"
   - include:
       file: "db/changelog/sql/parameter_value.yml"
+  - include:
+      file: "db/changelog/sql/parameter_override.yml"
+  - include:
+      file: "db/changelog/sql/agent.yml"
+
 
