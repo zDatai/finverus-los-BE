@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = false)
-public class AppicationVersionControl extends AuditCreateUser {
+public class ApplicationVersionControl extends AuditCreateUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

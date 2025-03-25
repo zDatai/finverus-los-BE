@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: "modified_user_${tableName}"
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: ${tableName}
+            columns:
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false

@@ -1,0 +1,92 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004
+      author: Udara
+      changes:
+        - createTable:
+            tableName: predefined_question
+            columns:
+              - column:
+                  name: predefined_question_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: questionnaire_section_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_predefined_question_section
+                    references: questionnaire_section(questionnaire_section_id)
+              - column:
+                  name: parent
+                  type: BIGINT
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sequence
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: skippable
+                  type: BIGINT
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: input_type
+                  type: VARCHAR(255)
+                  defaultValue: "TEXT"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: response_type
+                  type: VARCHAR(255)
+                  defaultValue: "TEXT"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: questionnaire_source_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_predefined_question_source
+                    references: option_source(option_source_id)
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+  #- property:
+      #name: tableName
+      #value: predefined_question
+  #- include:
+      #file: modified_user_auditor.yaml
+      #relativeToChangelogFile: true
+      #context: predefined_question
+      #labels: tableName=predefined_question

@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: Udara
+      changes:
+        - createTable:
+            tableName: option_source
+            columns:
+              - column:
+                  name: option_source_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: source_type
+                  type: VARCHAR(255)
+                  defaultValue: "STATIC"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+  #- property:
+      #name: tableName
+      #value: option_source
+  #- include:
+      #file: created_user_auditor.yaml
+      #relativeToChangelogFile: true
+      #context: option_source
+      #labels: tableName=option_source
