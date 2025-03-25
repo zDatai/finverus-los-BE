@@ -1,13 +1,13 @@
 databaseChangeLog:
   - changeSet:
-      id: create-product-scheme-table
-      author: system
+      id: create-agent-table
+      author: umesh
       changes:
         - createTable:
-            tableName: product_scheme
+            tableName: agent
             columns:
               - column:
-                  name: product_id
+                  name: agent_id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -15,26 +15,14 @@ databaseChangeLog:
                     nullable: false
 
               - column:
-                  name: product_name
-                  type: varchar(50)
+                  name: full_name
+                  type: varchar(100)
                   constraints:
                     nullable: true
 
               - column:
-                  name: activity_type
-                  type: varchar(255)
-                  constraints:
-                    nullable: true
-
-              - column:
-                  name: product_type
-                  type: varchar(50)
-                  constraints:
-                    nullable: true
-
-              - column:
-                  name: account_no_prefix
-                  type: varchar(50)
+                  name: agent_status
+                  type: varchar(8)
                   constraints:
                     nullable: true
 
@@ -73,7 +61,7 @@ databaseChangeLog:
               # Version column from BaseEntity
               - column:
                   name: version
-                  type: int
+                  type: INT
                   defaultValue: "0"
                   constraints:
                     nullable: false

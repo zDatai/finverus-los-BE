@@ -1,0 +1,170 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_chat_session_table
+      author: Udara
+      changes:
+        - createTable:
+            tableName: chat_session
+            columns:
+              - column:
+                  name: chat_session_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_chat_session_user
+                    references: user_account(user_id)
+              - column:
+                  name: version_control_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_chat_session_version
+                    references: app_version_control(app_version_control_id)
+              - column:
+                  name: chat_status
+                  type: VARCHAR(50)
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_chat_messages_table
+      author: Udara
+      changes:
+        - createTable:
+            tableName: chat_messages
+            columns:
+              - column:
+                  name: chat_message_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: chat_session_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_chat_messages_session
+                    references: chat_session(chat_session_id)
+              - column:
+                  name: version_control_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_chat_messages_version
+                    references: app_version_control(app_version_control_id)
+              - column:
+                  name: predefined_question_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_chat_messages_question
+                    references: predefined_question(predefined_question_id)
+              - column:
+                  name: response_text
+                  type: TEXT
+              - column:
+                  name: response_type
+                  type: VARCHAR(50)
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_chat_audit_log_table
+      author: Udara
+      changes:
+        - createTable:
+            tableName: chat_audit_log
+            columns:
+              - column:
+                  name: chat_audit_log_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: chat_message_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_chat_audit_log_message
+                    references: chat_messages(chat_message_id)
+              - column:
+                  name: previous_response
+                  type: TEXT
+              - column:
+                  name: new_response
+                  type: TEXT
+              - column:
+                  name: response_type
+                  type: VARCHAR(50)
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
