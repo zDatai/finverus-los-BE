@@ -9,3 +9,5 @@ databaseChangeLog:
       file: "db/changelog/sql/predefined_question.yaml"
   - include:
       file: "db/changelog/sql/api_endpoint.yaml"
+  - include:
+      file: "db/changelog/sql/chat_app_management.yaml"
