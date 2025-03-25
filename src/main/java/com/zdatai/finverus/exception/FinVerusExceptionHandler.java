@@ -205,7 +205,6 @@ public class FinVerusExceptionHandler {
       // Construct the error details
       Map<String, Object> errorDetails = new LinkedHashMap<>();
       errorDetails.put("value", rejectedValue);
-      errorDetails.put("fieldId", extractFieldId(error));
       errorDetails.put("description", errorMessage);
 
       // Convert field path to nested JSON structure
@@ -250,22 +249,4 @@ public class FinVerusExceptionHandler {
     }
   }
 
-  public static Long extractFieldId(FieldError error) {
-    if (error == null) {
-      logger.warn("Invalid input: FieldError is null");
-      return null;
-    }
-
-      String fieldName = error.getField();
-
-      Object fieldObject = error.getRejectedValue();
-
-      if (fieldObject instanceof com.zdatai.finverus.dto.InputField<?>) {
-        return ((com.zdatai.finverus.dto.InputField<?>) fieldObject).getFieldId();
-      } else {
-        logger.warn("Field '{}' is not of type Field<?>", fieldName);
-      }
-
-      return null;
-  }
 }

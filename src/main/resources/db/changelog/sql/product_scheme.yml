@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-product-scheme-table
+      author: system
+      changes:
+        - createTable:
+            tableName: product_scheme
+            columns:
+              - column:
+                  name: product_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: product_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: activity_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: product_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: account_no_prefix
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+
+              # Columns from AuditCreateUser
+              - column:
+                  name: created_user
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: created_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+
+              # Columns from AuditModifyUser
+              - column:
+                  name: modified_user
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: modified_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+
+              # Version column from BaseEntity
+              - column:
+                  name: version
+                  type: int
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
