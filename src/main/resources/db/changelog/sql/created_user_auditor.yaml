@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: "created_user_auditor_option_source"
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: ${tableName}
+            columns:
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
