@@ -1,4 +1,4 @@
-package com.zdatai.finverus.api.user;
+package com.zdatai.finverus.controller.api.user;
 
 import com.zdatai.finverus.config.FinVerusAuthToken;
 import com.zdatai.finverus.dto.user.LoginResultDTO;
