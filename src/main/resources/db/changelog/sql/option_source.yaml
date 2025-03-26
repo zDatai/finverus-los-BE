@@ -38,6 +38,39 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
+  - changeSet:
+      id: add-optionchoices-table
+      author: Udara
+      changes:
+        - createTable:
+            tableName: option_choices
+            columns:
+              - column:
+                  name: option_source_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: true
+                    primaryKey: true
+                    primaryKeyName: pk_option_choices
+                  autoIncrement: true
+              - column:
+                  name: source_type
+                  type: VARCHAR(255)
+                  defaultValue: 'STATIC'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+  - changeSet:
+      id: alter-optionchoices-add-default
+      author: Udara
+      changes:
+        - addDefaultValue:
+            tableName: option_choices
+            columnName: source_type
+            defaultValue: 'STATIC'
   #- property:
       #name: tableName
       #value: option_source

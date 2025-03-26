@@ -44,4 +44,7 @@ public class PredefinedQuestion extends AuditModifyUser {
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "questionnaire_source_id")
     private OptionSource questionnaireSource;
+
+    @Column(name = "question", nullable = false)
+    private String question;
 }

@@ -18,11 +18,11 @@ public class OptionChoices extends AuditCreateUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "option_source_id", nullable = false, unique = true)
-    private Long optionSourceId;
+    private Long optionChoiceId;
 
-    @Column(name = "source_type", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT STATIC")
-    @Enumerated(EnumType.STRING)
-    private SourceTypeEnum sourceType;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "source_id")
+    private OptionSource optionSource;
 
     @Column(name = "description")
     private String description;
