@@ -2,6 +2,7 @@ package com.zdatai.finverus.service.impl.master;
 
 import com.zdatai.finverus.config.MessageConfig;
 import com.zdatai.finverus.dto.InputField;
+import com.zdatai.finverus.dto.master.ProductSchemaDto;
 import com.zdatai.finverus.dto.master.ProductSchemaUpdateDto;
 import com.zdatai.finverus.dto.master.ProductSchemeCreateDto;
 import com.zdatai.finverus.enums.ActivityTypeEnum;
@@ -11,6 +12,8 @@ import com.zdatai.finverus.repository.master.ProductSchemeRepository;
 import com.zdatai.finverus.response.ApiResponse;
 import com.zdatai.finverus.service.master.ProductSchemeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,7 +39,7 @@ public class ProductSchemeServiceImpl implements ProductSchemeService {
 
     @Override
     public ApiResponse<String> update(Long productId, ProductSchemaUpdateDto updateDto) {
-        if(isProductSchemeExist(productId)){
+        if (isProductSchemeExist(productId)) {
             Optional<ProductScheme> productScheme = repository.findById(productId);
             if (productScheme.isPresent()) {
                 if (isVersionMatch(productScheme.get().getVersion(), getTypedValue(updateDto.getVersion()))) {
@@ -46,8 +49,9 @@ public class ProductSchemeServiceImpl implements ProductSchemeService {
                     productScheme.get().setActivityType(ActivityTypeEnum.valueOf(getValue(updateDto.getActivityType())));
                     productScheme.get().setStatus(AuditModifyUser.Status.valueOf(updateDto.getStatus().getValue()));
                     repository.save(productScheme.get());
-                    return ApiResponse.success(messageConfig.getMessage("product.scheme.update.success", productId));
-                }else {
+                    return ApiResponse.success(messageConfig.getMessage("product.scheme.update.success"
+                            , productId));
+                } else {
                     return ApiResponse.error(messageConfig.getMessage("product.scheme.version.mismatch"));
                 }
             }
@@ -55,6 +59,45 @@ public class ProductSchemeServiceImpl implements ProductSchemeService {
         }
 
         return ApiResponse.error(messageConfig.getMessage("product.scheme.not.found", productId));
+    }
+
+    @Override
+    public ApiResponse<ProductSchemaDto> getById(Long id) {
+        if (isProductSchemeExist(id)) {
+            Optional<ProductScheme> productScheme = repository.findById(id);
+            if (productScheme.isPresent()) {
+                return ApiResponse.success(convertToDto(productScheme.get()));
+            }
+        }
+        return ApiResponse.error(messageConfig.getMessage("product.scheme.not.found", id));
+    }
+
+    @Override
+    public ApiResponse<Page<ProductSchemaDto>> getAllByStatus(AuditModifyUser.Status status, Pageable pageable) {
+        Page<ProductScheme> productSchemePage = repository.findByStatus(status, pageable);
+        Page<ProductSchemaDto> productSchemaDtoPage = productSchemePage.map(this::convertToDto);
+
+        return ApiResponse.success(productSchemaDtoPage);
+    }
+
+    @Override
+    public ApiResponse<Page<ProductSchemaDto>> getAllProductSchemes(Pageable pageable) {
+        Page<ProductScheme> productSchemePage = repository.findAll(pageable);
+        Page<ProductSchemaDto> productSchemaDtoPage = productSchemePage.map(this::convertToDto);
+
+        return ApiResponse.success(productSchemaDtoPage);
+    }
+
+    private ProductSchemaDto convertToDto(ProductScheme productScheme) {
+        return ProductSchemaDto.builder()
+                .productId(productScheme.getProductId())
+                .productName(productScheme.getProductName())
+                .productType(productScheme.getProductType())
+                .accountNoPrefix(productScheme.getAccountNoPrefix())
+                .activityType(productScheme.getActivityType().name())
+                .status(productScheme.getStatus().name())
+                .version(productScheme.getVersion())
+                .build();
     }
 
     private Boolean isProductSchemeExist(Long productId){
