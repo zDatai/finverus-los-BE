@@ -39,7 +39,7 @@ public class ProductSchemeServiceImpl implements ProductSchemeService {
 
     @Override
     public ApiResponse<String> update(Long productId, ProductSchemaUpdateDto updateDto) {
-        if(isProductSchemeExist(productId)){
+        if (isProductSchemeExist(productId)) {
             Optional<ProductScheme> productScheme = repository.findById(productId);
             if (productScheme.isPresent()) {
                 if (isVersionMatch(productScheme.get().getVersion(), getTypedValue(updateDto.getVersion()))) {
@@ -49,8 +49,9 @@ public class ProductSchemeServiceImpl implements ProductSchemeService {
                     productScheme.get().setActivityType(ActivityTypeEnum.valueOf(getValue(updateDto.getActivityType())));
                     productScheme.get().setStatus(AuditModifyUser.Status.valueOf(updateDto.getStatus().getValue()));
                     repository.save(productScheme.get());
-                    return ApiResponse.success(messageConfig.getMessage("product.scheme.update.success", productId));
-                }else {
+                    return ApiResponse.success(messageConfig.getMessage("product.scheme.update.success"
+                            , productId));
+                } else {
                     return ApiResponse.error(messageConfig.getMessage("product.scheme.version.mismatch"));
                 }
             }
@@ -62,7 +63,7 @@ public class ProductSchemeServiceImpl implements ProductSchemeService {
 
     @Override
     public ApiResponse<ProductSchemaDto> getById(Long id) {
-        if(isProductSchemeExist(id)){
+        if (isProductSchemeExist(id)) {
             Optional<ProductScheme> productScheme = repository.findById(id);
             if (productScheme.isPresent()) {
                 return ApiResponse.success(convertToDto(productScheme.get()));
