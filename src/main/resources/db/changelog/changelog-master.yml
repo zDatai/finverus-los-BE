@@ -23,5 +23,17 @@ databaseChangeLog:
       file: "db/changelog/sql/parameter_override.yml"
   - include:
       file: "db/changelog/sql/agent.yml"
+  - include:
+      file: "db/changelog/sql/make.yaml"
+  - include:
+      file: "db/changelog/sql/asset_category.yaml"
+  - include:
+      file: "db/changelog/sql/vehicle_class.yaml"
+  - include:
+      file: "db/changelog/sql/model.yaml"
+  - include:
+      file: "db/changelog/sql/purpose.yaml"
+  - include:
+      file: "db/changelog/sql/insurance_institute.yaml"
 
 

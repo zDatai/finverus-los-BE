@@ -1,0 +1,309 @@
+  databaseChangeLog:
+    - changeSet:
+        id: 200
+        author: Uresh
+        changes:
+          - createTable:
+              tableName: search_customer
+              columns:
+                - column:
+                    name: client_id
+                    type: BIGINT
+                    constraints:
+                      primaryKey: true
+                      autoIncrement: true
+                      nullable: false
+                      unique: true
+                - column:
+                    name: client_code
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: client_category
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: client_identification
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: business_name_or_last_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: full_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: gender
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: is_citizen
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: is_dual_citizenship
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: is_related_company
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: is_related_company_description
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: passport_expiry_date
+                    type: TIMESTAMP
+                    constraints:
+                      nullable: false
+                - column:
+                    name: passport_issue_date
+                    type: TIMESTAMP
+                    constraints:
+                      nullable: false
+                - column:
+                    name: passport_no
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: visa_expired_date
+                    type: TIMESTAMP
+                    constraints:
+                      nullable: false
+                - column:
+                    name: civil_status_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: civil_status_name
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: customer_type_id
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: customer_type
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: nationality_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: nationality_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: priority_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: priority_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: race_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: race_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: religion_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: religion_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: title_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: title_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: visa_type_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: visa_type_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: onboarding_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: onboarding_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: name_with_initials
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: title
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: contact_number
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: contact_number_type
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: address_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: address_line_1
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: address_line_2
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: address_line_3
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: address_ownership
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: city_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: city_code
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: city_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: country_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: city_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: district_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: district_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: citizenship_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: citizenship_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: postal_area_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: postal_area_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: postal_area_code
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: province_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: province_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+                - column:
+                    name: secretarial_id
+                    type: BIGINT
+                    constraints:
+                      nullable: false
+                - column:
+                    name: secretarial_name
+                    type: VARCHAR
+                    constraints:
+                      nullable: false
+        #- property:
+        #name: tableName
+        #value: questionnaire_section
+        #- include:
+        #file: modified_user_auditor.yaml
+        #relativeToChangelogFile: true
+        #context: questionnaire_section
+        #labels: tableName=questionnaire_section
