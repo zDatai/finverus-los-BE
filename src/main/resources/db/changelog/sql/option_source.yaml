@@ -71,6 +71,42 @@ databaseChangeLog:
             tableName: option_choices
             columnName: source_type
             defaultValue: 'STATIC'
+  - changeSet:
+      id: rename-audit-columns-2
+      author: Udara
+      changes:
+        - renameColumn:
+            tableName: option_source
+            oldColumnName: created_by
+            newColumnName: created_user
+            columnDataType: VARCHAR(50)
+        - renameColumn:
+            tableName: option_source
+            oldColumnName: created_date
+            newColumnName: created_date_time
+            columnDataType: TIMESTAMP
+  - changeSet:
+      id: add-column
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: option_choices
+            columns:
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
   #- property:
       #name: tableName
       #value: option_source

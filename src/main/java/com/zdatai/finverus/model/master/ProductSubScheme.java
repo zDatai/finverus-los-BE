@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @SuperBuilder
-@Table(name = "produt_sub_scheme")
+@Table(name = "product_sub_scheme")
 public class ProductSubScheme extends AuditModifyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

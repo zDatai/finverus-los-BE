@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 206
+      author: Uresh
+      changes:
+        - createTable:
+            tableName: purpose
+            columns:
+              - column:
+                  name: purpose_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    autoIncrement: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: purpose
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version_control_id
+                  type: BIGINT
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+      #- property:
+      #name: tableName
+      #value: app_version_control
+      #- include:
+      #file: created_user_auditor.yaml
+      #relativeToChangelogFile: true
+      #context: app_version_control
+      #labels: tableName=app_version_control
