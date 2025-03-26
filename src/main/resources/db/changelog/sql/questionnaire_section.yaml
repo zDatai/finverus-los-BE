@@ -49,6 +49,43 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
+  - changeSet:
+      id: rename-audit-columns-2
+      author: Udara
+      changes:
+        - renameColumn:
+            tableName: questionnaire_section
+            oldColumnName: created_by
+            newColumnName: created_user
+            columnDataType: VARCHAR(50)
+        - renameColumn:
+            tableName: questionnaire_section
+            oldColumnName: created_date
+            newColumnName: created_date_time
+            columnDataType: TIMESTAMP
+        - renameColumn:
+            tableName: questionnaire_section
+            oldColumnName: modified_by
+            newColumnName: modified_user
+            columnDataType: VARCHAR(50)
+        - renameColumn:
+            tableName: questionnaire_section
+            oldColumnName: modified_date
+            newColumnName: modified_date_time
+            columnDataType: TIMESTAMP
+  - changeSet:
+      id: add-status-column-2
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: questionnaire_section
+            columns:
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                  defaultValue: 'ACTIVE'
   #- property:
       #name: tableName
       #value: questionnaire_section
