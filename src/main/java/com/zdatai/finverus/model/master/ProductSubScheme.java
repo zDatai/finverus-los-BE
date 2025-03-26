@@ -1,12 +1,12 @@
 package com.zdatai.finverus.model.master;
 
-import com.zdatai.finverus.enums.ProductSubSchemeStatusEnum;
 import com.zdatai.finverus.model.AuditModifyUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@SuperBuilder
 @Table(name = "produt_sub_scheme")
 public class ProductSubScheme extends AuditModifyUser {
     @Id
