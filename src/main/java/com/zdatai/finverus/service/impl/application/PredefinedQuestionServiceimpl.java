@@ -6,6 +6,7 @@ import com.zdatai.finverus.dto.application.*;
 import com.zdatai.finverus.enums.HTTPMethod;
 import com.zdatai.finverus.enums.SourceTypeEnum;
 import com.zdatai.finverus.exception.FinVerusException;
+import com.zdatai.finverus.model.application.ApplicationVersionControl;
 import com.zdatai.finverus.model.application.OptionSource;
 import com.zdatai.finverus.model.application.PredefinedQuestion;
 import com.zdatai.finverus.model.application.QuestionnaireSection;
@@ -109,6 +110,9 @@ public class PredefinedQuestionServiceimpl implements PredefinedQuestionService 
                 .skippable(predefinedQuestion.getSkippable())
                 .inputType(predefinedQuestion.getInputType())
                 .responseType(predefinedQuestion.getResponseType())
+                .question(predefinedQuestion.getQuestion())
+                .section(buildSection(predefinedQuestion.getQuestionnaireSection()))
+                .recordId(predefinedQuestion.getPredefinedQuestionsId())
                 .build();
     }
 
@@ -121,9 +125,24 @@ public class PredefinedQuestionServiceimpl implements PredefinedQuestionService 
                 .build();
     }
 
+    private SectionDto buildSection(final QuestionnaireSection section) {
+        return SectionDto.builder()
+                .recordId(section.getQuestionnaireSectionId())
+                .sequence(section.getSequence())
+                .sectionName(section.getSectionName()).build();
+                //.appVersion(buildVersionControl(section.get))
+    }
+
+    private ApplicationVersionControlDto buildVersionControl(final ApplicationVersionControl versionControl) {
+        return ApplicationVersionControlDto.builder()
+                .applicationVersionControlId(versionControl.getVersionControlId())
+                .recordId(versionControl.getApplicationVersionControlId())
+                .build();
+    }
+
     private List<OptionChoicesDto> buildChoices(final OptionSource optionSource) {
         if (optionSource.getSourceType() == SourceTypeEnum.STATIC) {
-            return optionChoicesService.getApiEndPointBySourceId(optionSource.getOptionSourceId());
+            return optionChoicesService.getChoicesBySourceId(optionSource.getOptionSourceId());
         }
 
         return Collections.emptyList();

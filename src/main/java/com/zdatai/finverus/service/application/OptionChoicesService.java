@@ -14,4 +14,6 @@ public interface OptionChoicesService {
     public OptionChoicesDto getApiEndPointById(final Long recordId) throws FinVerusException;
 
     public List<OptionChoicesDto> getApiEndPointBySourceId(final Long sourceId) throws FinVerusException;
+
+    public List<OptionChoicesDto> getChoicesBySourceId(final Long sourceId) throws FinVerusException;
 }
