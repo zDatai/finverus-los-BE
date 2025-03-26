@@ -17,7 +17,7 @@ public class Purpose extends AuditModifyUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "purpose")
+    @Column(name = "purpose_id")
     private Long purposeId;
 
     @Column(name = "purpose")
