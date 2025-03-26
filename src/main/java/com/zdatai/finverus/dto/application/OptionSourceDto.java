@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -13,9 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class OptionSourceDto extends CommonAttributes {
     private SourceTypeEnum sourceType;
     private String description;
     private List<OptionChoicesDto> choices;
-    private ApiEndPointDto apiEndPoint;
+    private String apiEndPointResponse;
 }

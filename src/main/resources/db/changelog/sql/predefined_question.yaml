@@ -82,6 +82,32 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
+  - changeSet:
+      id: add-question-column-to-chat-messages
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: predefined_question
+            columns:
+              - column:
+                  name: question
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: alter-optionchoices-add-source-id
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: option_choices
+            columns:
+              - column:
+                  name: source_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_option_choices_source
+                    references: option_source(option_source_id)
   #- property:
       #name: tableName
       #value: predefined_question
