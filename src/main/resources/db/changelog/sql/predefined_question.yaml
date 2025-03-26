@@ -108,6 +108,43 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_option_choices_source
                     references: option_source(option_source_id)
+  - changeSet:
+      id: rename-audit-columns
+      author: Udara
+      changes:
+        - renameColumn:
+            tableName: predefined_question
+            oldColumnName: created_by
+            newColumnName: created_user
+            columnDataType: VARCHAR(50)
+        - renameColumn:
+            tableName: predefined_question
+            oldColumnName: created_date
+            newColumnName: created_date_time
+            columnDataType: TIMESTAMP
+        - renameColumn:
+            tableName: predefined_question
+            oldColumnName: modified_by
+            newColumnName: modified_user
+            columnDataType: VARCHAR(50)
+        - renameColumn:
+            tableName: predefined_question
+            oldColumnName: modified_date
+            newColumnName: modified_date_time
+            columnDataType: TIMESTAMP
+  - changeSet:
+      id: add-status-column
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: predefined_question
+            columns:
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                  defaultValue: 'ACTIVE'
   #- property:
       #name: tableName
       #value: predefined_question
