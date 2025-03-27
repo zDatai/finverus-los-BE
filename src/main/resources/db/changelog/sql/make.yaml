@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 203
+      id: 220
       author: Uresh
       changes:
         - createTable:
@@ -20,18 +20,27 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: version_control_id
-                  type: BIGINT
-                  defaultValue: 1
-                  constraints:
-                    nullable: false
-              - column:
-                  name: created_by
+                  name: modified_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: created_date
+                  name: modified_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
@@ -40,11 +49,3 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
-      #- property:
-      #name: tableName
-      #value: app_version_control
-      #- include:
-      #file: created_user_auditor.yaml
-      #relativeToChangelogFile: true
-      #context: app_version_control
-      #labels: tableName=app_version_control

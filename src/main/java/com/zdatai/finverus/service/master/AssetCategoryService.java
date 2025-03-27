@@ -12,4 +12,6 @@ public interface AssetCategoryService {
     ApiResponse<Page<AssetCategoryResponse>> getAllByStatus(AuditModifyUser.Status status, Pageable pageable);
 
     ApiResponse<Page<AssetCategoryResponse>> getAllAssetCategory(Pageable pageable);
+
+    AssetCategoryResponse getAssetCategoryById(Long assetCategoryId);
 }

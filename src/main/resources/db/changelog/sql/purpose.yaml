@@ -40,11 +40,48 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
-      #- property:
-      #name: tableName
-      #value: app_version_control
-      #- include:
-      #file: created_user_auditor.yaml
-      #relativeToChangelogFile: true
-      #context: app_version_control
-      #labels: tableName=app_version_control
+
+  - changeSet:
+      id: U207
+      author: Uresh
+      changes:
+        # Drop columns
+        - dropColumn:
+            tableName: purpose
+            columnName: version_control_id
+        - dropColumn:
+            tableName: purpose
+            columnName: created_by
+        - dropColumn:
+            tableName: purpose
+            columnName: created_date
+
+        # Add new columns
+        - addColumn:
+            tableName: purpose
+            columns:
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: true

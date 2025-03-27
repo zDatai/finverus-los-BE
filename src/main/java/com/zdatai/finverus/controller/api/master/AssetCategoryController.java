@@ -18,10 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -66,6 +63,19 @@ public class AssetCategoryController {
         }
         return ResponseEntity.ok(response);
 
+    }
+    @Operation(summary = "Retrieve Asset category By Id", tags = {"Master Data"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved Asset category info by given Asset category id",
+                    content = @Content(schema = @Schema(implementation = AssetCategoryResponse.class))
+            )
+    })
+    @GetMapping(value = "/get/{assetCategoryId}")
+    public ResponseEntity<AssetCategoryResponse> getAssetCategoryById(@PathVariable Long assetCategoryId) {
+        AssetCategoryResponse response = assetCategoryService.getAssetCategoryById(assetCategoryId);
+        return ResponseEntity.ok(response);
     }
 
 }
