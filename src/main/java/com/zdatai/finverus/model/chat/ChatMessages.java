@@ -1,14 +1,13 @@
 package com.zdatai.finverus.model.chat;
 
-import com.zdatai.finverus.enums.ChatProgressStatus;
-import com.zdatai.finverus.enums.UIComponentTypeEnum;
 import com.zdatai.finverus.model.AuditModifyUser;
-import com.zdatai.finverus.model.application.ApplicationVersionControl;
 import com.zdatai.finverus.model.application.PredefinedQuestion;
-import com.zdatai.finverus.model.user.UserAccount;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "chat_messages")
@@ -24,23 +23,20 @@ public class ChatMessages extends AuditModifyUser {
     @Column(name = "chat_messages_id", nullable = false, unique = true)
     private Long chatMessageId;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "chat_session_id", nullable = false)
     private ChatSession chatSession;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "version_control_id", nullable = true)
-    private ApplicationVersionControl versionControl;
-
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "predefined_question_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "predefined_question_id", nullable = true)
     private PredefinedQuestion predefinedQuestion;
 
     @Column(name = "response_text")
     private String responseText;
 
-    @Column(name = "response_type", nullable = true)
-    @Enumerated(EnumType.STRING)
-    private UIComponentTypeEnum responseType;
+    @Column(name = "has_attachment")
+    private Integer hasAttachment;
 
+    @OneToMany(mappedBy = "chatMessages", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<SelectedValue> selectedValues = new ArrayList<>();
 }
