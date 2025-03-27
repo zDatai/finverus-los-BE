@@ -14,7 +14,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Entity
 @SuperBuilder
-@Table(name = "make")
+@Table(name = "make",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "make")})
 public class Make extends AuditModifyUser {
 
     @Id
@@ -22,7 +23,9 @@ public class Make extends AuditModifyUser {
     @Column(name = "make_id")
     private Long makeId;
 
-    @Column(name = "make")
+    @Column(name = "make", unique = true)
     private String make;
+
+
 
 }

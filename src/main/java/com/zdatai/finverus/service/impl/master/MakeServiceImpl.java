@@ -2,6 +2,7 @@ package com.zdatai.finverus.service.impl.master;
 
 import com.zdatai.finverus.config.MessageConfig;
 import com.zdatai.finverus.exception.FinVerusException;
+import com.zdatai.finverus.model.AuditModifyUser;
 import com.zdatai.finverus.model.master.Make;
 import com.zdatai.finverus.repository.master.MakeRepository;
 import com.zdatai.finverus.request.application.master.MakeRequest;
@@ -12,7 +13,7 @@ import com.zdatai.finverus.utility.FinVerusSpecificationUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -80,9 +81,12 @@ public class MakeServiceImpl implements MakeService {
 
         try {
             makeRepository.save(Make.builder()
-                    .make(makeRequest.getMake())
+                    .make(makeRequest.getMake().getValue())
+                    .status(AuditModifyUser.Status.ACTIVE)
                     .build()
             );
+        } catch (DataIntegrityViolationException dataIntegrityViolationException) {
+            throw new FinVerusException(config.getMessage("make.scheme.already.exist"));
         } catch (Exception e) {
             throw new FinVerusException(e.getMessage());
         }
@@ -100,18 +104,17 @@ public class MakeServiceImpl implements MakeService {
     public MakeResponse updateMake(Long id, MakeRequest makeRequest) {
         LOGGER.info("Updating make details: {}", makeRequest);
 
-        Optional<Make> make = makeRepository.findById(id);
+        Make make = makeRepository.findById(id)
+                .orElseThrow(() -> new FinVerusException(config.getMessage("make.scheme.not.found")));
 
-        if (make.isPresent()) {
-            String[] ignoreList = {"makeId"};
-            BeanUtils.copyProperties(makeRequest, make.get(), ignoreList);
-            makeRepository.saveAndFlush(make.get());
-        } else {
-            throw new FinVerusException(config.getMessage("make.scheme.not.found"));
+        try {
+            make.setMake(makeRequest.getMake().getValue());
+            return mapEntityToMake(makeRepository.saveAndFlush(make));
+        } catch (DataIntegrityViolationException e) {
+            throw new FinVerusException(config.getMessage("make.scheme.already.exist"));
+        } finally {
+            LOGGER.info("Updated make details: {}", makeRequest);
         }
-
-        LOGGER.info("Updated make details: {}", makeRequest);
-        return mapEntityToMake(make.get());
     }
 
     private MakeResponse mapEntityToMake(final Make make) {
@@ -126,6 +129,7 @@ public class MakeServiceImpl implements MakeService {
             return MakeResponse.builder()
                     .makeId(make.get().getMakeId())
                     .make(make.get().getMake())
+                    .status(make.get().getStatus())
                     .build();
         } else {
             throw new FinVerusException(config.getMessage("make.scheme.not.found"));

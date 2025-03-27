@@ -49,3 +49,30 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
+
+  - changeSet:
+      id: 221
+      author: AsithaZD
+      changes:
+        - addDefaultValue:
+            tableName: make
+            columnName: status
+            defaultValue: 'ACTIVE'
+
+  - changeSet:
+      id: 222
+      author: AsithaZD
+      changes:
+        - addAutoIncrement:
+            tableName: make
+            columnName: make_id
+            columnDataType: BIGINT
+
+  - changeSet:
+      id: 223
+      author: AsithaZD
+      changes:
+        - addUniqueConstraint:
+            tableName: make
+            columnNames: make
+            constraintName: unique_make

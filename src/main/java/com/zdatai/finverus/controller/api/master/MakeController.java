@@ -6,13 +6,13 @@ import com.zdatai.finverus.request.application.master.MakeRequest;
 import com.zdatai.finverus.response.ApiResponse;
 import com.zdatai.finverus.response.master.MakePageResponse;
 import com.zdatai.finverus.response.master.MakeResponse;
-import com.zdatai.finverus.response.master.ModelResponse;
 import com.zdatai.finverus.service.master.MakeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class MakeController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully Save Make",
                     content = @Content(schema = @Schema(implementation = Make.class)))})
     @PostMapping("/save")
-    public ResponseEntity<ApiResponse<String>> save(@RequestBody final MakeRequest makeRequest) {
+    public ResponseEntity<ApiResponse<String>> save(@RequestBody @Valid final MakeRequest makeRequest) {
         LOGGER.info("Received request for Save Make");
 
         makeService.saveMake(makeRequest);
@@ -60,7 +60,7 @@ public class MakeController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully updated make",
                     content = @Content(schema = @Schema(implementation = MakeResponse.class)))})
     @PutMapping("/{id}")
-    public ResponseEntity<MakeResponse> UpdateMake(@PathVariable final Long id, @RequestBody final MakeRequest makeRequest) {
+    public ResponseEntity<MakeResponse> UpdateMake(@PathVariable final Long id, @RequestBody @Valid final MakeRequest makeRequest) {
         LOGGER.info("Received request to update make");
 
         final MakeResponse makeResponse = makeService.updateMake(id, makeRequest);
