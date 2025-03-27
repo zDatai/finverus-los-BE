@@ -1,16 +1,14 @@
 package com.zdatai.finverus.response.master;
 
-import lombok.AllArgsConstructor;
+import com.zdatai.finverus.model.AuditModifyUser;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class AssetCategoryResponse {
-    private Long assetCategoryId;
-    private String assetCategory;
-    private VehicleClassResponse vehicle;
+  private Long assetCategoryId;
+  private String assetCategory;
+  private AuditModifyUser.Status status;
+  private VehicleClassResponse vehicle;
 }

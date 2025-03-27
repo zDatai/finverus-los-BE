@@ -1,4 +1,4 @@
-package com.zdatai.finverus.api.master;
+package com.zdatai.finverus.controller.api.master;
 
 import com.zdatai.finverus.constant.AppConstant;
 import com.zdatai.finverus.model.master.Make;

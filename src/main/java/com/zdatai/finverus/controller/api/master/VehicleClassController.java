@@ -1,4 +1,4 @@
-package com.zdatai.finverus.api.master;
+package com.zdatai.finverus.controller.api.master;
 
 import com.zdatai.finverus.service.master.VehicleService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 205
+      id: 2010
       author: Uresh
       changes:
         - createTable:
@@ -45,11 +45,48 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
-      #- property:
-      #name: tableName
-      #value: app_version_control
-      #- include:
-      #file: created_user_auditor.yaml
-      #relativeToChangelogFile: true
-      #context: app_version_control
-      #labels: tableName=app_version_control
+
+  - changeSet:
+      id: 2011
+      author: Uresh
+      changes:
+        # Drop columns
+        - dropColumn:
+            tableName: asset_category
+            columnName: version_control_id
+        - dropColumn:
+            tableName: asset_category
+            columnName: created_by
+        - dropColumn:
+            tableName: asset_category
+            columnName: created_date
+
+        # Add new columns
+        - addColumn:
+            tableName: asset_category
+            columns:
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
