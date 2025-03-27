@@ -178,7 +178,7 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: parent_id
+                  name: message_id
                   type: BIGINT
                   constraints:
                     nullable: false
@@ -200,6 +200,16 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: modified_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
                   name: version
                   type: INT
                   constraints:
@@ -214,5 +224,34 @@ databaseChangeLog:
               - column:
                   name: status
                   type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: add-column-status-2
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: chat_messages
+            columns:
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: add-column-status-3
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: selected_values
+            columns:
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reference_record_id
+                  type: BIGINT
                   constraints:
                     nullable: true
