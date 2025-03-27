@@ -204,3 +204,15 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
+  - changeSet:
+      id: add-column-status
+      author: Udara
+      changes:
+        - addColumn:
+            tableName: chat_session
+            columns:
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
