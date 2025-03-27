@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 201
+      id: U20
       author: Uresh
       changes:
         - createTable:
@@ -13,7 +13,6 @@ databaseChangeLog:
                     primaryKey: true
                     autoIncrement: true
                     nullable: false
-                    unique: true
               - column:
                   name: vehicle_class
                   type: VARCHAR(50)
@@ -21,35 +20,36 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: ltv_ratio
-                  type: BIGINT
+                  type: DECIMAL(25,2)
                   constraints:
                     nullable: false
               - column:
-                  name: version_control_id
-                  type: BIGINT
-                  defaultValue: 1
-                  constraints:
-                    nullable: false
+                  name: status
+                  type: VARCHAR(10)
               - column:
-                  name: created_by
+                  name: modified_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: created_date
+                  name: modified_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    updatable: false
+              - column:
+                  name: created_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                    updatable: false
               - column:
                   name: version
                   type: INT
                   constraints:
                     nullable: false
-      #- property:
-      #name: tableName
-      #value: app_version_control
-      #- include:
-      #file: created_user_auditor.yaml
-      #relativeToChangelogFile: true
-      #context: app_version_control
-      #labels: tableName=app_version_control

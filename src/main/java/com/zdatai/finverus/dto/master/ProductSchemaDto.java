@@ -14,4 +14,7 @@ public class ProductSchemaDto{
     private String activityType;
     private String status;
     private Integer version;
+
+
+
 }

@@ -6,9 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class AssetCategory extends AuditModifyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "asset_category_Id")
+    @Column(name = "asset_category_id")
     private Long assetCategoryId;
 
     @Column(name = "asset_category")
