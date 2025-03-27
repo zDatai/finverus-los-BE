@@ -90,3 +90,46 @@ databaseChangeLog:
                   type: VARCHAR(50)
                   constraints:
                     nullable: true
+
+  - changeSet:
+      id: 2012
+      author: Uresh
+      changes:
+        - renameColumn:
+            tableName: asset_category
+            oldColumnName: asset_category_Id
+            newColumnName: asset_category_id
+            columnDataType: BIGINT
+
+  - changeSet:
+      id: 2013
+      author: uresh
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: model
+            baseColumnNames: asset_category_Id
+            constraintName: fk_model_asset_category
+
+  - changeSet:
+      id: 2014
+      author: uresh
+      changes:
+        - modifyDataType:
+            tableName: asset_category
+            columnName: asset_category_Id
+            newDataType: BIGINT
+        - addAutoIncrement:
+            tableName: asset_category
+            columnName: asset_category_Id
+            columnDataType: BIGINT
+
+  - changeSet:
+      id: 2015
+      author: uresh
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: model
+            baseColumnNames: asset_category_Id
+            constraintName: fk_model_asset_category
+            referencedTableName: asset_category
+            referencedColumnNames: asset_category_Id

@@ -1,7 +1,10 @@
 package com.zdatai.finverus.controller.api.master;
 
 import com.zdatai.finverus.constant.AppConstant;
+import com.zdatai.finverus.dto.master.ProductSchemaUpdateDto;
 import com.zdatai.finverus.model.AuditModifyUser;
+import com.zdatai.finverus.request.master.AssetCategoryRequest;
+import com.zdatai.finverus.request.master.UpdateAssetCategoryRequest;
 import com.zdatai.finverus.response.master.AssetCategoryResponse;
 import com.zdatai.finverus.service.master.AssetCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -77,5 +81,41 @@ public class AssetCategoryController {
         AssetCategoryResponse response = assetCategoryService.getAssetCategoryById(assetCategoryId);
         return ResponseEntity.ok(response);
     }
+    @Operation(
+            summary = "Save new Asset category From master Data Dashboard",
+            tags = {"Master Data"})
+    @ApiResponses(
+            value = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully Save new Asset Type",
+                            content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+            })
 
+    @PostMapping("/create")
+    public ResponseEntity<com.zdatai.finverus.response.ApiResponse<String>> create(
+            @RequestBody @Valid final AssetCategoryRequest assetCategoryRequest) {
+        com.zdatai.finverus.response.ApiResponse<String> response = assetCategoryService.save(assetCategoryRequest);
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(
+            summary = "Update an existing Asset category",
+            description = "Updates aAsset category with the specified ID with new details"
+    )
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                    responseCode = "200",
+                    description = "Asset category updated successfully",
+                    content = @Content(schema = @Schema(implementation = com.zdatai.finverus.response.ApiResponse.class))
+            )
+
+    })
+    @PutMapping(value = "/update/{assetCategoryId}")
+    public ResponseEntity<com.zdatai.finverus.response.ApiResponse<String>> update(
+            @PathVariable final Long assetCategoryId,
+            @RequestBody @Valid final UpdateAssetCategoryRequest updateAssetCategoryRequest) {
+        com.zdatai.finverus.response.ApiResponse<String> response = assetCategoryService.update(assetCategoryId, updateAssetCategoryRequest);
+        return ResponseEntity.ok(response);
+    }
 }
