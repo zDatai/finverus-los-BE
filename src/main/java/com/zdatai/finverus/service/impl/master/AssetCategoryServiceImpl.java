@@ -66,7 +66,9 @@ public class AssetCategoryServiceImpl  implements AssetCategoryService {
         return AssetCategoryResponse.builder()
                 .assetCategoryId(assetCategory.getAssetCategoryId())
                 .assetCategory(assetCategory.getAssetCategory())
+                .vehicleClassId(assetCategory.getVehicleClass().getVehicalClassId())
                 .status(assetCategory.getStatus())
                 .build();
     }
+
 }
