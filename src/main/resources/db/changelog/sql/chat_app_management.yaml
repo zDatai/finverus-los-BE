@@ -31,22 +31,22 @@ databaseChangeLog:
                   name: chat_status
                   type: VARCHAR(50)
               - column:
-                  name: created_by
+                  name: created_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: created_date
+                  name: created_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
-                  name: modified_by
+                  name: modified_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: modified_date
+                  name: modified_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
@@ -57,63 +57,57 @@ databaseChangeLog:
                     nullable: false
 
   - changeSet:
-      id: create_chat_messages_table
-      author: Udara
+      id: create-chat-messages-table
+      author: your_name
       changes:
         - createTable:
             tableName: chat_messages
             columns:
               - column:
-                  name: chat_message_id
+                  name: chat_messages_id
                   type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
+                    unique: true
               - column:
                   name: chat_session_id
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_chat_messages_session
+                    foreignKeyName: fk_chat_messages_chat_session
                     references: chat_session(chat_session_id)
-              - column:
-                  name: version_control_id
-                  type: BIGINT
-                  constraints:
-                    nullable: true
-                    foreignKeyName: fk_chat_messages_version
-                    references: app_version_control(app_version_control_id)
               - column:
                   name: predefined_question_id
                   type: BIGINT
                   constraints:
-                    nullable: false
-                    foreignKeyName: fk_chat_messages_question
+                    nullable: true
+                    foreignKeyName: fk_chat_messages_predefined_question
                     references: predefined_question(predefined_question_id)
               - column:
                   name: response_text
-                  type: TEXT
+                  type: VARCHAR(255)
               - column:
-                  name: response_type
-                  type: VARCHAR(50)
+                  name: has_attachment
+                  type: INT
               - column:
-                  name: created_by
+                  name: created_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: created_date
+                  name: created_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
               - column:
-                  name: modified_by
+                  name: modified_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: modified_date
+                  name: modified_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
@@ -143,7 +137,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: fk_chat_audit_log_message
-                    references: chat_messages(chat_message_id)
+                    references: chat_messages(chat_messages_id)
               - column:
                   name: previous_response
                   type: TEXT
@@ -154,12 +148,54 @@ databaseChangeLog:
                   name: response_type
                   type: VARCHAR(50)
               - column:
-                  name: created_by
+                  name: created_user
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: created_date
+                  name: created_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-selected-values-table
+      author: Udara
+      changes:
+        - createTable:
+            tableName: selected_values
+            columns:
+              - column:
+                  name: selected_value_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: parent_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_selected_values_parent
+                    references: predefined_question(predefined_question_id)
+              - column:
+                  name: value
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
                   type: TIMESTAMP
                   constraints:
                     nullable: false
