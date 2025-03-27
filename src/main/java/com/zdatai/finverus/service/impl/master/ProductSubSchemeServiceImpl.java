@@ -62,8 +62,7 @@ public class ProductSubSchemeServiceImpl implements ProductSubSchemeService {
                     productSubScheme.get().setSchemeName(getValue(updateDto.getSchemeName()));
                     productSubScheme.get().setEffectiveDate(effectiveDate);
                     productSubScheme.get().setExpireDate(expiredDate);
-                    productSubScheme.get().setStatus(getTypedValue(updateDto.getStatus()));
-                    productSubScheme.get().setStatus(updateDto.getStatus().getTypedValue());
+                    productSubScheme.get().setStatus(AuditModifyUser.Status.valueOf(updateDto.getStatus().getValue()));
 
                     repository.save(productSubScheme.get());
                     return ApiResponse.success(messageConfig.getMessage("product.sub.scheme.update.success", schemeId));
