@@ -43,7 +43,7 @@ public class ChatMessageController {
     @PostMapping(value = "/create/{sessionId}")
     private ResponseEntity<ChatMessageResponse> createMessage(
             @PathVariable(name = "sessionId", required = true) final Long sessionId,
-            @RequestParam(value = "sortDir") final ChatMessageRequest messageRequest) {
+            @RequestParam(value = "messageRequest") final ChatMessageRequest messageRequest) {
 
         ChatMessageResponse response = chatMessageService.createMessage(sessionId, messageRequest);
 
