@@ -1,26 +1,26 @@
 package com.zdatai.finverus.api.master;
 
 import com.zdatai.finverus.constant.AppConstant;
+import com.zdatai.finverus.model.master.Make;
+import com.zdatai.finverus.request.application.master.MakeRequest;
+import com.zdatai.finverus.response.ApiResponse;
 import com.zdatai.finverus.response.master.MakePageResponse;
 import com.zdatai.finverus.response.master.MakeResponse;
+import com.zdatai.finverus.response.master.ModelResponse;
 import com.zdatai.finverus.service.master.MakeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
-import static org.hibernate.sql.ast.SqlTreeCreationLogger.LOGGER;
 
 @Slf4j
 @RestController
@@ -28,13 +28,51 @@ import static org.hibernate.sql.ast.SqlTreeCreationLogger.LOGGER;
 @RequestMapping(value = "/api/${version}/public/make")
 public class MakeController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MakeController.class);
     private final MakeService makeService;
 
-    @Operation(summary = "Retrieve  All Make", tags = {"Master Data"})
+    @Operation(summary = "Save Make Master Data", tags = {"Master Data"})
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved  All Make",
-                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = MakeResponse.class))))})
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully Save Make",
+                    content = @Content(schema = @Schema(implementation = Make.class)))})
+    @PostMapping("/save")
+    public ResponseEntity<ApiResponse<String>> save(@RequestBody final MakeRequest makeRequest) {
+        LOGGER.info("Received request for Save Make");
 
+        makeService.saveMake(makeRequest);
+
+        LOGGER.info("Saved make successfully");
+        return ResponseEntity.ok(ApiResponse.success(null));
+    }
+
+    @Operation(summary = "Get make using make_id", tags = {"Master Data"})
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully retrieved Make",
+                    content = @Content(schema = @Schema(implementation = MakeResponse.class)))})
+    @GetMapping(value = "/get/{makeId}")
+    public ResponseEntity<MakeResponse> getById(
+            @PathVariable Long makeId) {
+        return ResponseEntity.ok(makeService.getMakeById(makeId));
+    }
+
+    @Operation(summary = "Update make", tags = {"Master Data"})
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully updated make",
+                    content = @Content(schema = @Schema(implementation = MakeResponse.class)))})
+    @PutMapping("/{id}")
+    public ResponseEntity<MakeResponse> UpdateMake(@PathVariable final Long id, @RequestBody final MakeRequest makeRequest) {
+        LOGGER.info("Received request to update make");
+
+        final MakeResponse makeResponse = makeService.updateMake(id, makeRequest);
+
+        LOGGER.info("Retrieved successfully updated make: {}", makeResponse);
+        return ResponseEntity.ok(makeResponse);
+    }
+
+    @Operation(summary = "Retrieve All Make", tags = {"Master Data"})
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully retrieved  All Make",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = MakeResponse.class))))})
     @GetMapping(value = "/get/all")
     public ResponseEntity<MakePageResponse> getAllMake(
             @RequestParam(value = "pageNo", defaultValue = AppConstant.DEFAULT_PAGE_NO) final int pageNo,
@@ -48,7 +86,5 @@ public class MakeController {
         LOGGER.info("Fetched all Make successfully. Total Elements: {}, Total Pages: {}");
         return ResponseEntity.ok(response);
     }
-
-
 
 }
