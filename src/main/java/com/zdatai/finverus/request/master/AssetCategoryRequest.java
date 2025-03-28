@@ -3,7 +3,6 @@ package com.zdatai.finverus.request.master;
 import com.zdatai.finverus.annotation.ValidateField;
 import com.zdatai.finverus.dto.InputField;
 import com.zdatai.finverus.model.AuditModifyUser;
-import lombok.Builder;
 import lombok.Data;
 
 @Data
