@@ -29,6 +29,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -84,11 +85,12 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     public List<ChatMessageResponse> editMessage(List<EditMessageRequest> messageRequest)
             throws FinVerusException {
 
+        List<ChatMessageResponse> response = new ArrayList<>();
         messageRequest.forEach(e -> {
             ChatMessages messages = buildChatMessages(e);
-            buildChatMessageResponse(messages, selectValues);
+            response.add(buildChatMessageResponse(messages, messages.getSelectedValues()));
         });
-        return null;
+        return response;
     }
 
     @Override
