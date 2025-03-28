@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-question-validator-mapper-table
+      author: umesh
+      changes:
+        - createTable:
+            tableName: question_validator_mapper
+            columns:
+              - column:
+                  name: mapper_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: question_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_question_validator_question
+                    references: predefined_question(predefined_question_id)
+              - column:
+                  name: validation_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_question_validator_validation
+                    references: validation_rule(validation_id)
+              - column:
+                  name: validator_message
+                  type: varchar(500)
+              - column:
+                  name: version
+                  type: int
+                  defaultValueNumeric: "0"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  defaultValue: "ACTIVE"

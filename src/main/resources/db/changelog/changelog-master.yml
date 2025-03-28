@@ -35,5 +35,9 @@ databaseChangeLog:
       file: "db/changelog/sql/purpose.yaml"
   - include:
       file: "db/changelog/sql/insurance_institute.yaml"
+  - include:
+      file: "db/changelog/sql/validation_rule.yml"
+  - include:
+      file: "db/changelog/sql/question_validator_mapper.yml"
 
 
