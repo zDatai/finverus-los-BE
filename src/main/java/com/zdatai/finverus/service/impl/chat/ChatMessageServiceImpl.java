@@ -1,12 +1,14 @@
 package com.zdatai.finverus.service.impl.chat;
 
 import com.zdatai.finverus.config.MessageConfig;
+import com.zdatai.finverus.dto.application.PredefinedQuestionsDto;
 import com.zdatai.finverus.dto.chat.ChatMessagesDto;
 import com.zdatai.finverus.enums.ChatProgressStatus;
 import com.zdatai.finverus.exception.FinVerusException;
 import com.zdatai.finverus.model.AuditModifyUser;
 import com.zdatai.finverus.model.chat.ChatMessages;
 import com.zdatai.finverus.model.chat.ChatSession;
+import com.zdatai.finverus.model.chat.SelectedValue;
 import com.zdatai.finverus.repository.chat.ChatMessagesRepository;
 import com.zdatai.finverus.repository.chat.ChatSessionRepository;
 import com.zdatai.finverus.request.chat.ChatMessageRequest;
@@ -28,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ChatMessageServiceImpl implements ChatMessageService {
@@ -63,11 +66,19 @@ public class ChatMessageServiceImpl implements ChatMessageService {
         ChatMessages chatMessages = buildChatMessages(session, messageRequest);
 
         messagesRepository.save(chatMessages);
+
+        List<SelectedValue> getSelectValues = messageRequest.getSelectedValuesAsList().stream()
+                .peek(e -> e.setChatMessages(chatMessages)) // Modify the object
+                .collect(Collectors.toList());
+
+
         return ChatMessageResponse.builder()
+                .responseStatus("SUCCESS")
+                .nextQuestion(predefinedQuestionService
+                        .getNextQuestion(chatMessages.getPredefinedQuestion().getSequence()))
                 .messageResponse(ChatMessagesDto.builder()
                         .responseText(chatMessages.getResponseText())
-                        .question(predefinedQuestionService
-                                .getNextQuestion(chatMessages.getPredefinedQuestion().getSequence()))
+                        .question(predefinedQuestionService.getQuestionById(messageRequest.getQuestionId()))
                         .chatProgress(ChatProgressStatus.IN_PROGRESS)
                         .recordId(chatMessages.getChatMessageId())
                         .build())

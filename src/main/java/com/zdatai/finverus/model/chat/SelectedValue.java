@@ -26,7 +26,15 @@ public class SelectedValue extends AuditModifyUser {
     @JoinColumn(name = "message_id", nullable = false)
     private ChatMessages chatMessages;
 
+    @Column(name = "reference_record_id", nullable = true)
+    private Long referenceId;
+
     @Column(name = "value", nullable = false)
     private String value;
+
+    public SelectedValue(Long key, String value) {
+        this.referenceId = key;
+        this.value = value;
+    }
 }
 
