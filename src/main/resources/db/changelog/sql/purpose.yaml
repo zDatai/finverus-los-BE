@@ -85,3 +85,11 @@ databaseChangeLog:
                   type: VARCHAR(10)
                   constraints:
                     nullable: true
+  - changeSet:
+      id: U508
+      author: Uresh
+      changes:
+        - modifyDataType:
+            tableName: purpose
+            columnName: purpose_id
+            newDataType: BIGINT AUTO_INCREMENT
