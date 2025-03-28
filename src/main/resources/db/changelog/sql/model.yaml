@@ -63,3 +63,90 @@ databaseChangeLog:
       #relativeToChangelogFile: true
       #context: app_version_control
       #labels: tableName=app_version_control
+  - changeSet:
+      id: a22
+      author: AsithaZD
+      changes:
+        - addAutoIncrement:
+            tableName: model
+            columnName: model_id
+            columnDataType: BIGINT
+
+  - changeSet:
+      id: a23
+      author: AsithaZD
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_model_make
+            baseTableName: model
+            baseColumnNames: make_id
+            referencedTableName: make
+            referencedColumnNames: make_id
+
+  - changeSet:
+      id: a24
+      author: AsithaZD
+      changes:
+        - dropColumn:
+            tableName: model
+            columnName: vehicle_class_id
+
+  - changeSet:
+      id: a25
+      author: AsithaZD
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_model_asset_category
+            baseTableName: model
+            baseColumnNames: asset_category_id
+            referencedTableName: asset_category
+            referencedColumnNames: asset_category_id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  - changeSet:
+      id: a26
+      author: AsithaZD
+      changes:
+        - renameColumn:
+            tableName: model
+            oldColumnName: created_by
+            newColumnName: created_user
+            columnDataType: VARCHAR(50)
+        - renameColumn:
+            tableName: model
+            oldColumnName: created_date
+            newColumnName: created_date_time
+            columnDataType: TIMESTAMP
+
+  - changeSet:
+      id: a27
+      author: AsithaZD
+      changes:
+        - addColumn:
+            tableName: model
+            columns:
+              - column:
+                  name: modified_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: a28
+      author: AsithaZD
+      changes:
+        - addColumn:
+            tableName: model
+            columns:
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  defaultValue: 'ACTIVE'
+                  constraints:
+                    nullable: false

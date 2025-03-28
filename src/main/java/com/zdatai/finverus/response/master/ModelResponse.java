@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class ModelResponse {
     private Long modelId;
     private String model;
-    private Make make;
-    private Long vehicleClass;
+    private Long make;
     private Long assetCategory;
 }
