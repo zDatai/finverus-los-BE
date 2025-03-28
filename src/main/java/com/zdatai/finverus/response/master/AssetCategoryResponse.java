@@ -10,5 +10,5 @@ public class AssetCategoryResponse {
   private Long assetCategoryId;
   private String assetCategory;
   private AuditModifyUser.Status status;
-  private VehicleClassResponse vehicle;
+  private Long vehicleClassId;
 }

@@ -85,6 +85,12 @@ public class PredefinedQuestionServiceimpl implements PredefinedQuestionService 
     }
 
     @Override
+    public PredefinedQuestion getQuestionByIdInternal(Long recordId) throws FinVerusException {
+        return predefinedQuestionRepository.findById(recordId)
+                .orElseThrow(() -> new FinVerusException("error.record.not.found"));
+    }
+
+    @Override
     public List<PredefinedQuestionsDto> getQuestionsByOptionSourceId(Long sourceId) throws FinVerusException {
         return List.of();
     }

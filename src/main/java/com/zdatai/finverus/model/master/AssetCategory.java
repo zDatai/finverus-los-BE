@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class AssetCategory extends AuditModifyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "asset_category_Id")
+    @Column(name = "asset_category_id")
     private Long assetCategoryId;
 
     @Column(name = "asset_category")

@@ -4,12 +4,10 @@ import com.zdatai.finverus.config.MessageConfig;
 import com.zdatai.finverus.dto.application.PredefinedQuestionsDto;
 import com.zdatai.finverus.service.application.PredefinedQuestionService;
 import com.zdatai.finverus.service.application.QuestionnaireSectionService;
-import io.lettuce.core.cluster.PipelinedRedisFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

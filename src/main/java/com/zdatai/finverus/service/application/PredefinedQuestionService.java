@@ -2,6 +2,7 @@ package com.zdatai.finverus.service.application;
 
 import com.zdatai.finverus.dto.application.PredefinedQuestionsDto;
 import com.zdatai.finverus.exception.FinVerusException;
+import com.zdatai.finverus.model.application.PredefinedQuestion;
 import com.zdatai.finverus.request.application.PredefinedQuestionRequest;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface PredefinedQuestionService {
             throws FinVerusException;
 
     public PredefinedQuestionsDto getQuestionById(final Long recordId) throws FinVerusException;
+
+    PredefinedQuestion getQuestionByIdInternal(Long recordId) throws FinVerusException;
 
     public List<PredefinedQuestionsDto> getQuestionsByOptionSourceId(final Long sourceId) throws FinVerusException;
 
