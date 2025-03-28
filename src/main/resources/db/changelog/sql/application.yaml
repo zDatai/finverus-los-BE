@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-application-table
+      author: AsithaZD
+      changes:
+        - createTable:
+            tableName: application
+            columns:
+              - column:
+                  name: application_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: application_number
+                  type: INT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: application_type
+                  type: varchar(25)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: application_status
+                  type: varchar(25)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: application_amount
+                  type: decimal(25, 2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: total_advance_amount
+                  type: decimal(25, 2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: customer_type
+                  type: varchar(25)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: customer_id
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_scheme_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_application_product_scheme
+                    references: product_scheme(product_id)
+              - column:
+                  name: product_sub_scheme_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_application_product_sub_scheme
+                    references: product_sub_scheme(scheme_id)
+              - column:
+                  name: agent_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_application_agent
+                    references: agent(agent_id)
+              - column:
+                  name: introducer_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_application_user
+                    references: user_account(user_id)
+
+

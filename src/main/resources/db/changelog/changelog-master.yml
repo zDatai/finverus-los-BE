@@ -39,5 +39,7 @@ databaseChangeLog:
       file: "db/changelog/sql/validation_rule.yml"
   - include:
       file: "db/changelog/sql/question_validator_mapper.yml"
+  - include:
+      file: "db/changelog/sql/application.yaml"
 
 
