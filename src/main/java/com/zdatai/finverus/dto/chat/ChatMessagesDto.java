@@ -7,6 +7,8 @@ import com.zdatai.finverus.enums.UIComponentTypeEnum;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +21,5 @@ public class ChatMessagesDto extends CommonAttributes {
     private ChatProgressStatus chatProgress;
     private ChatAuditLogDto auditLog;
     private UIComponentTypeEnum responseType;
+    private List<SelecteValueDto> selectedValues;
 }

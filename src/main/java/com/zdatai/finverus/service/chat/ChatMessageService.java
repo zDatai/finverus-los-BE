@@ -14,7 +14,7 @@ public interface ChatMessageService {
     public ChatMessageResponse createMessage(final Long sessionId, final ChatMessageRequest messageRequest)
             throws FinVerusException;
 
-    public ChatMessageResponse editMessage(List<EditMessageRequest> messageRequest)
+    List<ChatMessageResponse> editMessage(List<EditMessageRequest> messageRequest)
             throws FinVerusException;
 
     public ChatMessageMultipleResponse getChatMessagesByListIds(final List<Long> recordIds)

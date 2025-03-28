@@ -1,8 +1,8 @@
 package com.zdatai.finverus.service.impl.chat;
 
 import com.zdatai.finverus.config.MessageConfig;
-import com.zdatai.finverus.dto.application.PredefinedQuestionsDto;
 import com.zdatai.finverus.dto.chat.ChatMessagesDto;
+import com.zdatai.finverus.dto.chat.SelecteValueDto;
 import com.zdatai.finverus.enums.ChatProgressStatus;
 import com.zdatai.finverus.exception.FinVerusException;
 import com.zdatai.finverus.model.AuditModifyUser;
@@ -11,6 +11,7 @@ import com.zdatai.finverus.model.chat.ChatSession;
 import com.zdatai.finverus.model.chat.SelectedValue;
 import com.zdatai.finverus.repository.chat.ChatMessagesRepository;
 import com.zdatai.finverus.repository.chat.ChatSessionRepository;
+import com.zdatai.finverus.repository.chat.SelectedValuesRepository;
 import com.zdatai.finverus.request.chat.ChatMessageRequest;
 import com.zdatai.finverus.request.chat.EditMessageRequest;
 import com.zdatai.finverus.response.chat.ChatMessageMultipleResponse;
@@ -41,6 +42,8 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
     private final ChatSessionRepository sessionRepository;
 
+    private final SelectedValuesRepository selectedValuesRepository;
+
     private final PredefinedQuestionService predefinedQuestionService;
 
     private final MessageConfig config;
@@ -48,10 +51,12 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     public ChatMessageServiceImpl(
             final ChatMessagesRepository messagesRepository,
             final ChatSessionRepository sessionRepository,
+            final SelectedValuesRepository selectedValuesRepository,
             final PredefinedQuestionService predefinedQuestionService,
             final MessageConfig config) {
         this.messagesRepository = messagesRepository;
         this.sessionRepository = sessionRepository;
+        this.selectedValuesRepository = selectedValuesRepository;
         this.predefinedQuestionService = predefinedQuestionService;
         this.config = config;
     }
@@ -67,27 +72,22 @@ public class ChatMessageServiceImpl implements ChatMessageService {
 
         messagesRepository.save(chatMessages);
 
-        List<SelectedValue> getSelectValues = messageRequest.getSelectedValuesAsList().stream()
-                .peek(e -> e.setChatMessages(chatMessages)) // Modify the object
+        List<SelectedValue> selectValues = messageRequest.getSelectedValuesAsList().stream()
+                .peek(e -> e.setChatMessages(chatMessages))
                 .collect(Collectors.toList());
 
-
-        return ChatMessageResponse.builder()
-                .responseStatus("SUCCESS")
-                .nextQuestion(predefinedQuestionService
-                        .getNextQuestion(chatMessages.getPredefinedQuestion().getSequence()))
-                .messageResponse(ChatMessagesDto.builder()
-                        .responseText(chatMessages.getResponseText())
-                        .question(predefinedQuestionService.getQuestionById(messageRequest.getQuestionId()))
-                        .chatProgress(ChatProgressStatus.IN_PROGRESS)
-                        .recordId(chatMessages.getChatMessageId())
-                        .build())
-                .build();
+        selectedValuesRepository.saveAll(selectValues);
+        return buildChatMessageResponse(chatMessages, selectValues);
     }
 
     @Override
-    public ChatMessageResponse editMessage(List<EditMessageRequest> messageRequest)
+    public List<ChatMessageResponse> editMessage(List<EditMessageRequest> messageRequest)
             throws FinVerusException {
+
+        messageRequest.forEach(e -> {
+            ChatMessages messages = buildChatMessages(e);
+            buildChatMessageResponse(messages, selectValues);
+        });
         return null;
     }
 
@@ -124,6 +124,22 @@ public class ChatMessageServiceImpl implements ChatMessageService {
         return null;
     }
 
+    private ChatMessages buildChatMessages(final EditMessageRequest messageRequest) {
+
+        ChatMessages messages = messagesRepository.findById(messageRequest.getRecordId())
+                .orElseThrow(() -> new FinVerusException("Record not found"));
+        messages.setResponseText(messageRequest.getResponseText());
+        messages.setHasAttachment(messageRequest.getHasAttachment());
+
+        if (!messageRequest.getSelectedValues().isEmpty()) {
+            selectedValuesRepository.saveAllAndFlush(messageRequest.getSelectedValuesAsList().stream()
+                    .peek(e -> e.setChatMessages(messages))
+                    .collect(Collectors.toList()));
+        }
+
+        return messagesRepository.saveAndFlush(messages);
+    }
+
     private ChatMessages buildChatMessages(final ChatSession session, final ChatMessageRequest request) {
         return ChatMessages.builder()
                 .chatSession(session)
@@ -133,4 +149,30 @@ public class ChatMessageServiceImpl implements ChatMessageService {
                 .responseText(request.getResponseText())
                 .build();
     }
+
+    private ChatMessageResponse buildChatMessageResponse(final ChatMessages chatMessages, List<SelectedValue> selectValues) {
+        return ChatMessageResponse.builder()
+                .responseStatus("SUCCESS")
+                .nextQuestion(predefinedQuestionService
+                        .getNextQuestion(chatMessages.getPredefinedQuestion().getSequence()))
+                .messageResponse(ChatMessagesDto.builder()
+                        .responseText(chatMessages.getResponseText())
+                        .question(predefinedQuestionService.getQuestionById(
+                                chatMessages.getPredefinedQuestion().getPredefinedQuestionsId()))
+                        .chatProgress(ChatProgressStatus.IN_PROGRESS)
+                        .recordId(chatMessages.getChatMessageId())
+                        .selectedValues(selectValues.stream()
+                                .map(e -> SelecteValueDto.builder()
+                                        .recordId(e.getSelectedValueId())
+                                        .referenceId(e.getReferenceId())
+                                        .value(e.getValue())
+                                        .chatMessagesId(chatMessages.getChatMessageId())
+                                        .build())
+                                .collect(Collectors.toList())
+                        )
+                        .build())
+                .build();
+    }
+
+
 }
