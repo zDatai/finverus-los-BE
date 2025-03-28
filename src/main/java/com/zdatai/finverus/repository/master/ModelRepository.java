@@ -7,8 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 public interface ModelRepository extends JpaRepository<Model,Long> {
     @Query("SELECT new com.zdatai.finverus.response.master.ModelResponse(m.modelId, m.model, m.make.makeId," +
             " m.assetCategory.assetCategoryId) FROM Model m ORDER BY m.model asc")
     Page<ModelResponse> getAllModels(Pageable pageable);
+
+    Optional<Model> findModelByMake_MakeId(Long makeMakeId);
 }

@@ -3,7 +3,6 @@ package com.zdatai.finverus.service.master;
 import com.zdatai.finverus.request.application.master.MakeRequest;
 import com.zdatai.finverus.response.master.MakePageResponse;
 import com.zdatai.finverus.response.master.MakeResponse;
-import com.zdatai.finverus.response.master.ModelResponse;
 
 import java.util.Map;
 

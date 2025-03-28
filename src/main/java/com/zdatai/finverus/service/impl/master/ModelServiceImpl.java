@@ -65,6 +65,12 @@ public class ModelServiceImpl implements ModelService {
         return getModelResponse(model);
     }
 
+    @Override
+    public ModelResponse getModelByMakeId(Long id) {
+        Optional<Model> model = modelRepository.findModelByMake_MakeId(id);
+        return getModelResponse(model);
+    }
+
     private ModelResponse getModelResponse(Optional<Model> model) {
         if (model.isPresent()) {
             return ModelResponse.builder()
@@ -114,7 +120,7 @@ public class ModelServiceImpl implements ModelService {
             model.setMake(make);
             model.setAssetCategory(assetCategory);
             model.setModel(modelRequest.getModel().getTypedValue());
-            return mapEntityToModel(modelRepository.save(model));
+            return mapEntityToModel(modelRepository.saveAndFlush(model));
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

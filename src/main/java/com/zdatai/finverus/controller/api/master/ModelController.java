@@ -1,15 +1,11 @@
 package com.zdatai.finverus.controller.api.master;
 
 import com.zdatai.finverus.constant.AppConstant;
-import com.zdatai.finverus.model.master.Make;
 import com.zdatai.finverus.model.master.Model;
-import com.zdatai.finverus.request.application.master.MakeRequest;
 import com.zdatai.finverus.request.application.master.ModelRequest;
 import com.zdatai.finverus.response.ApiResponse;
-import com.zdatai.finverus.response.master.MakeResponse;
 import com.zdatai.finverus.response.master.ModelPageResponse;
 import com.zdatai.finverus.response.master.ModelResponse;
-import com.zdatai.finverus.service.master.MakeService;
 import com.zdatai.finverus.service.master.ModelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -55,6 +51,16 @@ public class ModelController {
     public ResponseEntity<ModelResponse> getById(
             @PathVariable Long modelId) {
         return ResponseEntity.ok(modelService.getModelById(modelId));
+    }
+
+    @Operation(summary = "Get model using make_id", tags = {"Master Data"})
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Successfully retrieved Model",
+                    content = @Content(schema = @Schema(implementation = ModelResponse.class)))})
+    @GetMapping(value = "/getByMake/{makeId}")
+    public ResponseEntity<ModelResponse> getByMakeId(
+            @PathVariable Long makeId) {
+        return ResponseEntity.ok(modelService.getModelByMakeId(makeId));
     }
 
     @Operation(summary = "Update model", tags = {"Master Data"})

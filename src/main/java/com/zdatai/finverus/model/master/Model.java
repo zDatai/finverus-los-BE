@@ -29,10 +29,6 @@ public class Model extends AuditModifyUser {
     @ManyToOne(fetch = FetchType.LAZY)
     private Make make;
 
-    @JoinColumn(name = "vehical_class_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private VehicleClass vehicleClass;
-
     @JoinColumn(name = "asset_category_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private AssetCategory assetCategory;
