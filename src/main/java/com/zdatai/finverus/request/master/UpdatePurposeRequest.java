@@ -5,13 +5,10 @@ import com.zdatai.finverus.dto.InputField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
-
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UpdateAssetCategoryRequest extends AssetCategoryRequest{
+public class UpdatePurposeRequest extends PurposeRequest{
+
     @ValidateField(required = true, message = "Version is Required", expectedType = Integer.class)
     private InputField<Integer> version;
-
-
 }
