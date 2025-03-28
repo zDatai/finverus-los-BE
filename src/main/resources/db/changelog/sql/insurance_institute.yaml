@@ -40,6 +40,57 @@ databaseChangeLog:
                   type: INT
                   constraints:
                     nullable: false
+  - changeSet:
+      id: U801
+      author: Uresh
+      changes:
+        - modifyDataType:
+            tableName: insurance_institute
+            columnName: insurance_institute_id
+            newDataType: BIGINT AUTO_INCREMENT
+  - changeSet:
+      id: U802
+      author: Uresh
+      changes:
+        - dropColumn:
+            tableName: insurance_institute
+            columnName: version_control_id
+        - dropColumn:
+            tableName: insurance_institute
+            columnName: created_by
+        - dropColumn:
+            tableName: insurance_institute
+            columnName: created_date
+        - addColumn:
+            tableName: insurance_institute
+            columns:
+              - column:
+                  name: modified_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(10)
+                  remarks: "ACTIVE or INACTIVE"
+              - column:
+                  name: created_user
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                  remarks: "Will not be updated after initial creation"
+              - column:
+                  name: created_date_time
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                  remarks: "Will not be updated after initial creation"
+
       #- property:
       #name: tableName
       #value: app_version_control

@@ -1,11 +1,14 @@
 package com.zdatai.finverus.response.master;
 
-import lombok.AllArgsConstructor;
+import com.zdatai.finverus.model.AuditModifyUser;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 @Data
 @Builder
-public class InsuranceInstituteResponse {}
+public class InsuranceInstituteResponse {
+    private Long insuranceInstituteId;
+    private String insuranceInstituteName;
+    private AuditModifyUser.Status status;
+
+
+}
