@@ -1,0 +1,313 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-validation-rule-table
+      author: umesh
+      changes:
+        - createTable:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: validation_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: regex_pattern
+                  type: varchar(500)
+              - column:
+                  name: default_message
+                  type: varchar(500)
+              - column:
+                  name: version
+                  type: int
+                  defaultValue: "0"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  defaultValue: "ACTIVE"
+
+  - changeSet:
+      id: insert-validation-rule-data
+      author: umesh
+      changes:
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "Integer Validation"
+              - column:
+                  name: data_type
+                  value: "Integer"
+              - column:
+                  name: regex_pattern
+                  value: "^-?\\d+$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid integer"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "Long Validation"
+              - column:
+                  name: data_type
+                  value: "Long"
+              - column:
+                  name: regex_pattern
+                  value: "^-?\\d+$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid long number"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "Double Validation"
+              - column:
+                  name: data_type
+                  value: "Double"
+              - column:
+                  name: regex_pattern
+                  value: "^-?\\d+(\\.\\d+)?$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid decimal number"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "String Validation"
+              - column:
+                  name: data_type
+                  value: "String"
+              - column:
+                  name: regex_pattern
+                  value: "^[\\s\\S]*$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid string"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "BigDecimal Validation"
+              - column:
+                  name: data_type
+                  value: "BigDecimal"
+              - column:
+                  name: regex_pattern
+                  value: "^-?\\d+(\\.\\d+)?$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid decimal number"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "LocalDate Validation"
+              - column:
+                  name: data_type
+                  value: "LocalDate"
+              - column:
+                  name: regex_pattern
+                  value: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid date in the format YYYY-MM-DD"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "LocalDateTime Validation"
+              - column:
+                  name: data_type
+                  value: "LocalDateTime"
+              - column:
+                  name: regex_pattern
+                  value: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])T([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(\\.\\d+)?$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid datetime in the format YYYY-MM-DDThh:mm:ss"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+
+        - insert:
+            tableName: validation_rule
+            columns:
+              - column:
+                  name: name
+                  value: "Date Validation"
+              - column:
+                  name: data_type
+                  value: "Date"
+              - column:
+                  name: regex_pattern
+                  value: "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+              - column:
+                  name: default_message
+                  value: "Value must be a valid date in the format YYYY-MM-DD"
+              - column:
+                  name: created_user
+                  value: "zdatai"
+              - column:
+                  name: created_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: modified_user
+                  value: "zdatai"
+              - column:
+                  name: modified_date_time
+                  valueDate: "CURRENT_TIMESTAMP"
+              - column:
+                  name: status
+                  value: "ACTIVE"
